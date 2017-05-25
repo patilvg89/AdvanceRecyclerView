@@ -145,4 +145,8 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
     private int pxToDp(int px) {
         return (int) (px / Resources.getSystem().getDisplayMetrics().density);
     }
+
+    public RecyclerView.Adapter getAdapter() {
+        return customRecyclerView.getAdapter();
+    }
 }
