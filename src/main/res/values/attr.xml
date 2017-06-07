@@ -3,6 +3,7 @@
 
     <declare-styleable name="RecyclerViewEmptySupport">
         <attr name="empty_list_text" format="string" />
+        <attr name="empty_list_text_color" format="color" />
         <attr name="empty_image_height" format="dimension" />
         <attr name="empty_image_width" format="dimension" />
         <attr name="empty_image_drawable" format="integer" />

@@ -68,6 +68,13 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
                 emptyTextView.setText(a.getString(R.styleable.RecyclerViewEmptySupport_empty_list_text));
             }
 
+            //No record found text available
+            emptyTextViewColorAttrAvailable = a.hasValue(R.styleable.RecyclerViewEmptySupport_empty_list_text_color);
+            if (emptyTextViewColorAttrAvailable) {
+                emptyTextView.setTextColor(a.getColor(R.styleable.RecyclerViewEmptySupport_empty_list_text_color,
+                        ContextCompat.getColor(context, android.R.color.black)));
+            }
+
             //Empty image available
             emptyImageViewAttrAvailable = a.hasValue(R.styleable.RecyclerViewEmptySupport_empty_image_drawable);
             if (emptyImageViewAttrAvailable) {
@@ -91,6 +98,10 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
         } else {
             customRecyclerView.setAdapter(adapter);
         }
+    }
+
+    public void setHasFixedSize(boolean value) {
+        customRecyclerView.setHasFixedSize(value);
     }
 
     public void setAdapterWithEmptyTextView(RecyclerView.Adapter adapter, @Nullable String textMessage) {
