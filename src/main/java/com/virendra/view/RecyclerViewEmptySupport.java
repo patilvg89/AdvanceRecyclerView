@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Dimension;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -30,6 +31,7 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
     private Context context;
     private boolean emptyTextViewAttrAvailable = false;
     private boolean emptyImageViewAttrAvailable = false;
+    private boolean emptyTextViewColorAttrAvailable = false;
 
     public RecyclerViewEmptySupport(Context context) {
         super(context);
@@ -68,7 +70,7 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
                 emptyTextView.setText(a.getString(R.styleable.RecyclerViewEmptySupport_empty_list_text));
             }
 
-            //No record found text available
+            //No record found text color available
             emptyTextViewColorAttrAvailable = a.hasValue(R.styleable.RecyclerViewEmptySupport_empty_list_text_color);
             if (emptyTextViewColorAttrAvailable) {
                 emptyTextView.setTextColor(a.getColor(R.styleable.RecyclerViewEmptySupport_empty_list_text_color,
@@ -159,5 +161,73 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
 
     public RecyclerView.Adapter getAdapter() {
         return customRecyclerView.getAdapter();
+    }
+
+    public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
+        customRecyclerView.addItemDecoration(itemDecoration);
+    }
+
+    public void notifyDataSetChanged() {
+        customRecyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    public void notifyItemRemoved(int position) {
+        customRecyclerView.getAdapter().notifyItemRemoved(position);
+    }
+
+    public void notifyItemInserted(int position) {
+        customRecyclerView.getAdapter().notifyItemInserted(position);
+    }
+
+    public void notifyItemRangeChanged(int positionStart, int itemCount) {
+        customRecyclerView.getAdapter().notifyItemRangeChanged(positionStart, itemCount);
+    }
+
+    public void notifyItemRangeInserted(int positionStart, int itemCount) {
+        customRecyclerView.getAdapter().notifyItemRangeInserted(positionStart, itemCount);
+    }
+
+    public void notifyItemRangeRemoved(int positionStart, int itemCount) {
+        customRecyclerView.getAdapter().notifyItemRangeRemoved(positionStart, itemCount);
+    }
+
+    public void setPaginationAdapter(RecyclerView.Adapter adapter, final int visibleThreshold, final int allItemCount, final RecyclerViewCallback callback) {
+        if (adapter.getItemCount() <= visibleThreshold) {//for st page adapter size will be <= perPageCount
+            setAdapter(adapter);
+        }
+
+        //final int totalPagesForPagination = allItemCount <= visibleThreshold ? 1 : (allItemCount / visibleThreshold) + 1;
+
+        customRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int visibleItemCount = customRecyclerView.getLayoutManager().getChildCount();
+                int totalItemCount = customRecyclerView.getLayoutManager().getItemCount();
+                int lastVisibleItem = ((LinearLayoutManager) customRecyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                int firstVisibleItem = ((LinearLayoutManager) customRecyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+                if ((totalItemCount - visibleItemCount)//reached to end do api call
+                        <= (firstVisibleItem + visibleThreshold) && totalItemCount < allItemCount) {
+                    callback.loadMoreItems((totalItemCount / visibleThreshold) + 1);
+                } else if ((totalItemCount - visibleItemCount)//reached to end
+                        <= (firstVisibleItem + visibleThreshold) && totalItemCount == allItemCount) {
+                    callback.hasLoadedAllItems(true);
+                }
+            }
+        });
+
+    }
+
+    public void updatePaginationAdapter(final RecyclerView.Adapter adapter, final int size) {
+        customRecyclerView.post(new Runnable() {
+            public void run() {
+                adapter.notifyItemInserted(size - 1);
+            }
+        });
     }
 }
