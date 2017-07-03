@@ -61,6 +61,9 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
         customRecyclerView = (CustomRecyclerView) v.findViewById(R.id.custom_recycler_view);
         customRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
+        //hide recycler-view by default if data is available then show it
+        customRecyclerView.setVisibility(View.GONE);
+
         if (null != attrs) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RecyclerViewEmptySupport);
 
@@ -68,6 +71,7 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
             emptyTextViewAttrAvailable = a.hasValue(R.styleable.RecyclerViewEmptySupport_empty_list_text);
             if (emptyTextViewAttrAvailable) {
                 emptyTextView.setText(a.getString(R.styleable.RecyclerViewEmptySupport_empty_list_text));
+                emptyTextView.setVisibility(View.VISIBLE);
             }
 
             //No record found text color available
@@ -81,6 +85,7 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
             emptyImageViewAttrAvailable = a.hasValue(R.styleable.RecyclerViewEmptySupport_empty_image_drawable);
             if (emptyImageViewAttrAvailable) {
                 emptyImageView.setImageDrawable(a.getDrawable(R.styleable.RecyclerViewEmptySupport_empty_image_drawable));
+                emptyImageView.setVisibility(View.VISIBLE);
             }
 
             //Empty image width/height provided by developer
