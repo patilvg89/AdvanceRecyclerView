@@ -40,8 +40,7 @@ e) recyclerview1.setAdapterWithEmptyImageView(adapter, null); //To show library 
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          app:empty_list_text="No data found..." />
- ```
-  ```
+
     b) For image : import at parent layout:  xmlns:app="http://schemas.android.com/apk/res-auto"
        If height and width not mentioned then image parameters are WRAP_CONTENT
 
@@ -54,8 +53,7 @@ e) recyclerview1.setAdapterWithEmptyImageView(adapter, null); //To show library 
         app:empty_image_width="100dp" />
 ```
 5) Recyclerview Pagination (Currently set Empty image/text not supported)
-```
-int visibleThreshold = 10;
+```int visibleThreshold = 10;
 final int totalItemCount = 101;//value from  server response where server returns the total count for list
 recyclerview.setPaginationAdapter(adapter1, visibleThreshold, totalItemCount, new RecyclerViewCallback() {
      @Override
@@ -76,4 +74,3 @@ recyclerview.setPaginationAdapter(adapter1, visibleThreshold, totalItemCount, ne
      }
  });
  ```
- 
