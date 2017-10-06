@@ -216,11 +216,11 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
                 int totalItemCount = customRecyclerView.getLayoutManager().getItemCount();
                 int lastVisibleItem = ((LinearLayoutManager) customRecyclerView.getLayoutManager()).findLastVisibleItemPosition();
                 int firstVisibleItem = ((LinearLayoutManager) customRecyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-                if ((totalItemCount - visibleItemCount)//reached to end do api call
-                        <= (firstVisibleItem + visibleThreshold) && totalItemCount < allItemCount) {
-                    callback.loadMoreItems((totalItemCount / visibleThreshold) + 1);
-                } else if ((totalItemCount - visibleItemCount)//reached to end
-                        <= (firstVisibleItem + visibleThreshold) && totalItemCount == allItemCount) {
+                if (totalItemCount < allItemCount) {
+                    if ((visibleItemCount + firstVisibleItem) >= totalItemCount && firstVisibleItem >= 0) {
+                        callback.loadMoreItems((totalItemCount / visibleThreshold) + 1);
+                    }
+                } else {
                     callback.hasLoadedAllItems(true);
                 }
             }
