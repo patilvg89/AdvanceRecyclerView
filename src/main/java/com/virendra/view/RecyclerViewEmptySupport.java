@@ -59,7 +59,8 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
         emptyTextView = (TextView) v.findViewById(R.id.list_empty_text);
         emptyImageView = (ImageView) v.findViewById(R.id.list_empty_image);
         customRecyclerView = (CustomRecyclerView) v.findViewById(R.id.custom_recycler_view);
-        customRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        customRecyclerView.setLayoutManager(new LinearLayoutManager(context));//default linear layout manager
+
 
         //hide recycler-view by default if data is available then show it
         customRecyclerView.setVisibility(View.GONE);
@@ -234,5 +235,9 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
                 adapter.notifyItemInserted(size - 1);
             }
         });
+    }
+
+    public void setLayoutManager(RecyclerView.LayoutManager layoutManager) {
+        customRecyclerView.setLayoutManager(layoutManager);
     }
 }
