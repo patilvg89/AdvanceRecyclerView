@@ -10,7 +10,7 @@
   
 * Add the dependency to app build.gradle
 	dependencies {
-	   compile 'com.github.patilvg89:AdvanceRecyclerView:1.0.0'
+	   compile 'com.github.patilvg89:AdvanceRecyclerView:1.0.1'
 	}
 
 1) Add below layout to your xml
@@ -22,7 +22,7 @@
 2) Create Adapter and set Adapter to recyclerview1
 
 3) Use setAdapter() method as per your requirement
-  
+  
 a) recyclerview1.setAdapter(adapter);
 b) recyclerview1.setAdapterWithEmptyTextView(adapter, "There are no record to show...");
 c) recyclerview1.setAdapterWithEmptyImageView(adapter, ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
@@ -55,27 +55,30 @@ e) recyclerview1.setAdapterWithEmptyImageView(adapter, null); //To show library 
 int visibleThreshold = 10;
 final int totalItemCount = 101;//value from  server response where server returns the total count for list
 recyclerview.setPaginationAdapter(adapter1, visibleThreshold, totalItemCount, new RecyclerViewCallback() {
-     @Override
-     public void loadMoreItems(int pageNo) {
-         //do API call and get response
-         API_CALL(pageNo);
-         
-         //add response to list
-         list.addAll(...);
-         
-         //update adapter
-         recyclerviewSupport.updatePaginationAdapter(adapter1, list.size());
-     }
+     @Override
+     public void loadMoreItems(int pageNo) {
+         //do API call and get response
+         API_CALL(pageNo);
+         
+         //add response to list
+         list.addAll(...);
+         
+         //update adapter
+         recyclerviewSupport.updatePaginationAdapter(adapter1, list.size());
+     }
 
-     @Override
-     public void hasLoadedAllItems(boolean value) {
-         Log.d("TAG", "Reached to end");
-     }
+     @Override
+     public void hasLoadedAllItems(boolean value) {
+         Log.d("TAG", "Reached to end");
+     }
  });
  
  
  6) RecyclerView Pagination
-	recyclerview.setPaginationAdapter(adapter, PER_PAGE/*10*/, totalItems/*we already have total items from service*/, new RecyclerViewCallback() {
+	
+
+
+recyclerview.setPaginationAdapter(adapter, PER_PAGE/*10*/, totalItems/*we already have total items from service*/, new RecyclerViewCallback() {
     @Override
         public void loadMoreItems(int pageNo) {
            //do api call
@@ -83,5 +86,9 @@ recyclerview.setPaginationAdapter(adapter1, visibleThreshold, totalItemCount, ne
 
         @Override
         public void hasLoadedAllItems(boolean value) {
+
         }
+
     });
+
+
