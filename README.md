@@ -83,6 +83,5 @@ recyclerview.setPaginationAdapter(adapter1, visibleThreshold, totalItemCount, ne
 
         @Override
         public void hasLoadedAllItems(boolean value) {
-
         }
     });
