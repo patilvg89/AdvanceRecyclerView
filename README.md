@@ -23,7 +23,7 @@
 2) Create Adapter and set Adapter to recyclerview1
 
 3) Use setAdapter() method as per your requirement
-  ```
+```
 a) recyclerview1.setAdapter(adapter);
 b) recyclerview1.setAdapterWithEmptyTextView(adapter, "There are no record to show...");
 c) recyclerview1.setAdapterWithEmptyImageView(adapter, ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
@@ -53,7 +53,8 @@ e) recyclerview1.setAdapterWithEmptyImageView(adapter, null); //To show library 
         app:empty_image_width="100dp" />
 ```
 5) Recyclerview Pagination (Currently set Empty image/text not supported)
-```int visibleThreshold = 10;
+```
+int visibleThreshold = 10;
 final int totalItemCount = 101;//value from  server response where server returns the total count for list
 recyclerview.setPaginationAdapter(adapter1, visibleThreshold, totalItemCount, new RecyclerViewCallback() {
      @Override
