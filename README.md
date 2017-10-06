@@ -32,17 +32,19 @@ e) recyclerview1.setAdapterWithEmptyImageView(adapter, null); //To show library 
 ```
 4) Empty Text and Image can be added in xml layout
    If your mentioned text and image in xml layout then ImageView has more priority than TextView
+    ```
    a)  For empty text:  import at parent layout:  xmlns:app="http://schemas.android.com/apk/res-auto"
- ```
+
        <com.virendra.view.RecyclerViewEmptySupport
          android:id="@+id/recyclerview1"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          app:empty_list_text="No data found..." />
  ```
+  ```
     b) For image : import at parent layout:  xmlns:app="http://schemas.android.com/apk/res-auto"
        If height and width not mentioned then image parameters are WRAP_CONTENT
- ```
+
        <com.virendra.view.RecyclerViewEmptySupport
         android:id="@+id/recyclerview1"
         android:layout_width="match_parent"
