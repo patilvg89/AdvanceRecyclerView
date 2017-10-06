@@ -73,3 +73,16 @@ recyclerview.setPaginationAdapter(adapter1, visibleThreshold, totalItemCount, ne
      }
  });
  
+ 
+ 6) RecyclerView Pagination
+ recyclerview.setPaginationAdapter(adapter, PER_PAGE/*10*/, totalItems/*we already have total items from service*/, new RecyclerViewCallback() {
+                @Override
+                public void loadMoreItems(int pageNo) {
+                   //do api call
+                }
+
+                @Override
+                public void hasLoadedAllItems(boolean value) {
+
+                }
+            });
