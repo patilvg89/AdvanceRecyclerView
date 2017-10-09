@@ -95,7 +95,39 @@ public class RecyclerViewEmptySupport extends RelativeLayout {
                 setEmptyImageViewWidthHeight(a.getDimension(R.styleable.RecyclerViewEmptySupport_empty_image_width, Dimension.DP),
                         a.getDimension(R.styleable.RecyclerViewEmptySupport_empty_image_height, Dimension.DP));
             }
+
+            setTextViewPadding(a);
+
+            //empty textview text size
+            if (a.hasValue(R.styleable.RecyclerViewEmptySupport_empty_text_size)) {
+                emptyTextView.setTextSize(a.getDimension(R.styleable.RecyclerViewEmptySupport_empty_text_size, Dimension.DP));
+            }
         }
+    }
+
+    private void setTextViewPadding(TypedArray a) {
+        int paddingLeft = 0;
+        int paddingTop = 0;
+        int paddingRight = 0;
+        int paddingBottom = 0;
+
+        if (a.hasValue(R.styleable.RecyclerViewEmptySupport_empty_text_padding_left)) {
+            paddingLeft = (int) a.getDimension(R.styleable.RecyclerViewEmptySupport_empty_text_padding_left, Dimension.DP);
+        }
+
+        if (a.hasValue(R.styleable.RecyclerViewEmptySupport_empty_text_padding_top)) {
+            paddingTop = (int) a.getDimension(R.styleable.RecyclerViewEmptySupport_empty_text_padding_top, Dimension.DP);
+        }
+
+        if (a.hasValue(R.styleable.RecyclerViewEmptySupport_empty_text_padding_right)) {
+            paddingRight = (int) a.getDimension(R.styleable.RecyclerViewEmptySupport_empty_text_padding_right, Dimension.DP);
+        }
+
+        if (a.hasValue(R.styleable.RecyclerViewEmptySupport_empty_text_padding_bottom)) {
+            paddingBottom = (int) a.getDimension(R.styleable.RecyclerViewEmptySupport_empty_text_padding_bottom, Dimension.DP);
+        }
+
+        emptyTextView.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
     }
 
     public void setAdapter(RecyclerView.Adapter adapter) {

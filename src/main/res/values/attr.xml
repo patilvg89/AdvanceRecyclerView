@@ -3,6 +3,17 @@
 
     <declare-styleable name="RecyclerViewEmptySupport">
         <attr name="empty_list_text" format="string" />
+        <attr name="empty_text_padding_top" format="dimension" />
+        <attr name="empty_text_padding_bottom" format="dimension" />
+        <attr name="empty_text_padding_left" format="dimension" />
+        <attr name="empty_text_padding_right" format="dimension" />
+        <attr name="empty_text_size" format="dimension" />
+
+        <!--<attr name="empty_text_margin_top" format="dimension" />-->
+        <!--<attr name="empty_text_margin_bottom" format="dimension" />-->
+        <!--<attr name="empty_text_margin_left" format="dimension" />-->
+        <!--<attr name="empty_text_margin_right" format="dimension" />-->
+
         <attr name="empty_list_text_color" format="color" />
         <attr name="empty_image_height" format="dimension" />
         <attr name="empty_image_width" format="dimension" />
